@@ -15,8 +15,7 @@
   @endif
 
   @php
-    // ---- PROGRESO DE COMPLETITUD ----
-    // Define qué campos consideras para "100%"
+    // Progreso (para 100% contamos campos + fotos)
     $checks = [
       'Fecha compra' => !empty($purchase->purchase_date),
       'Proveedor' => !empty($purchase->supplier_id),
@@ -38,30 +37,28 @@
 
   <div class="grid grid-cols-1 gap-6 xl:grid-cols-12">
 
-    {{-- LEFT: Form (Personal Information style) --}}
+    {{-- LEFT: Form (Plantilla: Personal Information's) --}}
     <div class="xl:col-span-8">
       <div class="rounded-lg border border-bgray-300 bg-white p-6 dark:border-darkblack-400 dark:bg-darkblack-600">
 
         <div class="mb-6 flex items-center justify-between">
           <div>
             <h2 class="text-xl font-bold text-bgray-900 dark:text-white">Personal Information's</h2>
-            <p class="text-sm text-bgray-500">Edita la compra #{{ $purchase->id }} (estructura tipo plantilla)</p>
+            <p class="text-sm text-bgray-500">Edita la compra #{{ $purchase->id }}</p>
           </div>
           <a href="{{ route('purchases.index') }}" class="rounded-lg border px-4 py-2 text-sm font-bold">
             Volver
           </a>
         </div>
 
-        <form
-          method="POST"
-          action="{{ route('purchases.update', $purchase->id) }}"
-          enctype="multipart/form-data"
-          class="space-y-8"
-        >
+        <form method="POST"
+              action="{{ route('purchases.update', $purchase->id) }}"
+              enctype="multipart/form-data"
+              class="space-y-8">
           @csrf
           @method('PUT')
 
-          {{-- Section: Datos principales --}}
+          {{-- Datos de compra --}}
           <div>
             <h3 class="mb-4 text-lg font-bold text-bgray-900 dark:text-white">Datos de compra</h3>
 
@@ -128,7 +125,7 @@
             </div>
           </div>
 
-          {{-- Section: Identificadores --}}
+          {{-- Identificadores --}}
           <div>
             <h3 class="mb-4 text-lg font-bold text-bgray-900 dark:text-white">Identificadores</h3>
 
@@ -154,7 +151,7 @@
             </div>
           </div>
 
-          {{-- Section: Precios --}}
+          {{-- Precios --}}
           <div>
             <h3 class="mb-4 text-lg font-bold text-bgray-900 dark:text-white">Precios</h3>
 
@@ -188,7 +185,7 @@
             </div>
           </div>
 
-          {{-- Section: Fotos (inputs) --}}
+          {{-- Fotos --}}
           <div>
             <h3 class="mb-4 text-lg font-bold text-bgray-900 dark:text-white">Fotos</h3>
 
@@ -197,19 +194,16 @@
                 <label class="mb-2 block text-sm font-medium text-bgray-700 dark:text-bgray-50">Actualizar Foto IMEI</label>
                 <input type="file" name="imei_photo" accept="image/*"
                        class="w-full rounded-lg bg-bgray-100 p-3 text-sm text-bgray-700 dark:bg-darkblack-500 dark:text-white">
-                <p class="mt-2 text-xs text-bgray-500">Recomendado: foto clara y sin reflejos.</p>
               </div>
 
               <div>
                 <label class="mb-2 block text-sm font-medium text-bgray-700 dark:text-bgray-50">Actualizar Foto Teléfono</label>
                 <input type="file" name="phone_photo" accept="image/*"
                        class="w-full rounded-lg bg-bgray-100 p-3 text-sm text-bgray-700 dark:bg-darkblack-500 dark:text-white">
-                <p class="mt-2 text-xs text-bgray-500">Recomendado: frontal o posterior completo.</p>
               </div>
             </div>
           </div>
 
-          {{-- Actions --}}
           <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
             <a href="{{ route('purchases.index') }}" class="h-[56px] inline-flex items-center justify-center rounded-lg border px-6 text-sm font-bold">
               Cancelar
@@ -218,36 +212,33 @@
               Guardar cambios
             </button>
           </div>
-
         </form>
       </div>
     </div>
 
-    {{-- RIGHT: Progress + Previews --}}
+    {{-- RIGHT: Progreso + Previews --}}
     <div class="xl:col-span-4">
       <div class="rounded-lg border border-bgray-300 bg-white p-6 dark:border-darkblack-400 dark:bg-darkblack-600">
 
         <h3 class="text-lg font-bold text-bgray-900 dark:text-white">Complete purchase</h3>
-        <p class="text-sm text-bgray-500">Completa la compra para desbloquear todo.</p>
+        <p class="text-sm text-bgray-500">Progreso de completitud del registro.</p>
 
-        {{-- Progress ring --}}
         <div class="mt-5 flex items-center gap-4">
           <div
             class="h-[70px] w-[70px] rounded-full flex items-center justify-center"
-            style="background: conic-gradient(#22c55e {{ $percent }}%, rgba(255,255,255,0.12) 0);"
+            style="background: conic-gradient(#22c55e {{ $percent }}%, rgba(0,0,0,0.10) 0);"
           >
-            <div class="h-[56px] w-[56px] rounded-full bg-darkblack-600 flex items-center justify-center bg-white dark:bg-darkblack-600">
+            <div class="h-[56px] w-[56px] rounded-full bg-white dark:bg-darkblack-600 flex items-center justify-center">
               <span class="text-sm font-bold text-bgray-900 dark:text-white">{{ $percent }}%</span>
             </div>
           </div>
 
           <div>
-            <p class="text-sm font-semibold text-bgray-900 dark:text-white">Progreso del registro</p>
+            <p class="text-sm font-semibold text-bgray-900 dark:text-white">Progreso</p>
             <p class="text-xs text-bgray-500">{{ $done }} / {{ $total }} campos</p>
           </div>
         </div>
 
-        {{-- Missing fields --}}
         @if($missing->count() > 0)
           <div class="mt-5 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
             <p class="font-bold text-sm mb-2">Falta completar:</p>
@@ -263,29 +254,20 @@
           </div>
         @endif
 
-        {{-- PREVIEWS --}}
         <div class="mt-6 space-y-5">
-
-          {{-- IMEI Preview --}}
+          {{-- Preview IMEI --}}
           <div class="rounded-lg border border-bgray-200 p-4 dark:border-darkblack-400">
             <div class="flex items-center justify-between mb-3">
               <p class="text-sm font-bold text-bgray-900 dark:text-white">Preview IMEI</p>
-              @if(!empty($purchase->imei_photo_path))
-                <span class="text-xs text-success-300 font-bold">OK</span>
-              @else
-                <span class="text-xs text-red-500 font-bold">FALTA</span>
-              @endif
             </div>
 
             @if(!empty($purchase->imei_photo_path))
               <img
                 src="{{ asset('storage/' . $purchase->imei_photo_path) }}"
                 alt="IMEI"
-                class="w-full rounded-lg object-cover cursor-pointer
-                       h-[180px] sm:h-[220px] xl:h-[180px]"
+                class="w-full rounded-lg object-cover cursor-pointer h-[180px] sm:h-[220px] xl:h-[180px]"
                 onclick="openImg(this.src)"
               />
-              <p class="mt-2 text-xs text-bgray-500">Toca para ver grande</p>
             @else
               <div class="h-[180px] sm:h-[220px] xl:h-[180px] rounded-lg bg-bgray-100 dark:bg-darkblack-500 flex items-center justify-center text-bgray-500">
                 Sin imagen
@@ -293,34 +275,27 @@
             @endif
           </div>
 
-          {{-- Phone Preview --}}
+          {{-- Preview Teléfono --}}
           <div class="rounded-lg border border-bgray-200 p-4 dark:border-darkblack-400">
             <div class="flex items-center justify-between mb-3">
               <p class="text-sm font-bold text-bgray-900 dark:text-white">Preview Teléfono</p>
-              @if(!empty($purchase->phone_photo_path))
-                <span class="text-xs text-success-300 font-bold">OK</span>
-              @else
-                <span class="text-xs text-red-500 font-bold">FALTA</span>
-              @endif
             </div>
 
             @if(!empty($purchase->phone_photo_path))
               <img
                 src="{{ asset('storage/' . $purchase->phone_photo_path) }}"
                 alt="Teléfono"
-                class="w-full rounded-lg object-cover cursor-pointer
-                       h-[180px] sm:h-[220px] xl:h-[180px]"
+                class="w-full rounded-lg object-cover cursor-pointer h-[180px] sm:h-[220px] xl:h-[180px]"
                 onclick="openImg(this.src)"
               />
-              <p class="mt-2 text-xs text-bgray-500">Toca para ver grande</p>
             @else
               <div class="h-[180px] sm:h-[220px] xl:h-[180px] rounded-lg bg-bgray-100 dark:bg-darkblack-500 flex items-center justify-center text-bgray-500">
                 Sin imagen
               </div>
             @endif
           </div>
-
         </div>
+
       </div>
     </div>
 
@@ -328,7 +303,6 @@
 @endsection
 
 @section('scripts')
-  {{-- Modal imagen --}}
   <div id="imgModal" class="fixed inset-0 hidden items-center justify-center bg-black/70 z-[9999]" onclick="closeImg()">
     <img id="imgModalSrc" src="" class="max-h-[90vh] max-w-[90vw] rounded-xl border bg-white" alt="preview">
   </div>
@@ -351,7 +325,7 @@
       if(e.key === 'Escape') closeImg();
     });
 
-    // Auto calcular venta si elige margen
+    // Auto-calcular venta por margen
     const purchasePrice = document.getElementById('purchase_price');
     const markup = document.getElementById('markup');
     const salePrice = document.getElementById('sale_price');
@@ -365,28 +339,5 @@
     }
     purchasePrice?.addEventListener('input', calcSale);
     markup?.addEventListener('change', calcSale);
-
-    // AJAX colores según modelo (debes tener este endpoint)
-    const modelSelect = document.getElementById('model_id');
-    const colorSelect = document.getElementById('color_id');
-
-    async function loadColors(modelId){
-      colorSelect.innerHTML = '<option value="">Cargando...</option>';
-      const res = await fetch(`/api/modelos/${modelId}/colores`);
-      const data = await res.json();
-      colorSelect.innerHTML = '<option value="">Selecciona</option>';
-      data.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c.id;
-        opt.textContent = c.name;
-        colorSelect.appendChild(opt);
-      });
-    }
-
-    modelSelect?.addEventListener('change', (e) => {
-      const id = e.target.value;
-      if(!id) return;
-      loadColors(id);
-    });
   </script>
 @endsection
