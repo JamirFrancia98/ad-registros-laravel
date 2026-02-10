@@ -201,7 +201,7 @@
   </td>
 
   <!-- Precio costo (siempre) -->
-<td class="py-4 text-bgray-900 dark:text-white min-w-[90px] whitespace-nowrap">
+<td class="py-4 text-bgray-900 dark:text-white min-w-[90px] whitespace-nowrap" >
     S/ {{ number_format((float)$r->purchase_price, 0) }}
   </td>
 
