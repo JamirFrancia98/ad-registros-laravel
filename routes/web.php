@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductRegisterController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
 | Home
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -66,3 +68,5 @@ Route::put('/compras/{id}', [ProductRegisterController::class, 'update'])
 
 Route::delete('/compras/{id}', [ProductRegisterController::class, 'destroy'])
     ->name('purchases.destroy');
+
+Route::resource('proveedores', SupplierController::class);

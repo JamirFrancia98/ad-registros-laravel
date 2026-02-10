@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage; // Para manejo de archivos
@@ -10,7 +11,7 @@ class ProductRegisterController extends Controller
 {
     public function create()
     {
-        $suppliers = DB::table('suppliers')->orderBy('name')->get();
+        $suppliers = Supplier::query()->orderBy('name')->get();
         $models = DB::table('iphone_models')->orderBy('name')->get();
         $storages = DB::table('storage_options')->orderBy('gb')->get();
 
