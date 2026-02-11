@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-  />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-  <title>@yield('title', 'AD Registros')</title>
+    <title>@yield('title', 'AD Registros')</title>
 
-  {{-- CSS --}}
-  <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}" />
-  <link rel="stylesheet" href="{{ asset('assets/css/aos.css') }}" />
-  <link rel="stylesheet" href="{{ asset('assets/css/output.css') }}" />
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    {{-- CSS --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/aos.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/output.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
 </head>
 
 <body>
-<div class="layout-wrapper active w-full">
-  <div class="relative flex w-full">
+    <!-- layout start -->
+    <div class="layout-wrapper active w-full">
+        <div class="relative flex w-full">
 
     {{-- SIDEBAR FULL --}}
     <aside class="sidebar-wrapper fixed top-0 z-30 block h-full w-[308px] bg-gray-400 dark:bg-darkblack-600 sm:hidden xl:block">
@@ -391,21 +391,23 @@
           </div>
         @endif
 
-        @yield('content')
-      </main>
+                    @yield('content')
+                </main>
 
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-{{-- JS --}}
-<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/aos.js') }}"></script>
-<script src="{{ asset('assets/js/slick.min.js') }}"></script>
-<script src="{{ asset('assets/js/quill.min.js') }}"></script>
-<script src="{{ asset('assets/js/main.js') }}"></script>
-<script src="{{ asset('assets/js/chart.js') }}"></script>
-<script>AOS.init();</script>
+    {{-- JS --}}
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/aos.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
+    <script src="{{ asset('assets/js/quill.min.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/chart.js') }}"></script>
+    <script>
+        AOS.init();
+    </script>
 
 
 
@@ -511,11 +513,11 @@
 </script>
 
 
-<script>
-  function toggleSidebarGroup(groupId, arrowId) {
-    const group = document.getElementById(groupId);
-    const arrow = document.getElementById(arrowId);
-    if (!group) return;
+    <script>
+        function toggleSidebarGroup(groupId, arrowId) {
+            const group = document.getElementById(groupId);
+            const arrow = document.getElementById(arrowId);
+            if (!group) return;
 
     const isHidden = group.classList.contains('hidden');
     group.classList.toggle('hidden');
@@ -567,6 +569,6 @@
 </script>
 
 
-@yield('scripts')
+    @yield('scripts')
 </body>
 </html> 

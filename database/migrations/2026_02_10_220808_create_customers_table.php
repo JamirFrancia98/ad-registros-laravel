@@ -11,22 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id();
-
-            $table->string('first_name', 80);
-            $table->string('last_name', 80);
-
+        Schema::table('customers', function (Blueprint $table) {
             $table->string('document_type', 5); // DNI | CE
             $table->string('document_number', 20);
-
-            $table->string('email', 120)->nullable();
-            $table->string('phone', 30);
-            $table->string('operator', 30)->nullable();
-
-            $table->timestamps();
-
-            $table->unique(['document_type', 'document_number']);
         });
     }
 
@@ -35,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropColumn('document_type');
+            $table->dropColumn('document_number');
+        });
     }
 };
