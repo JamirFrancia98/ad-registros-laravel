@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\ProductRegisterController;
 use App\Http\Controllers\SupplierController;
-
+use App\Http\Controllers\SaleController;
 /*
 |--------------------------------------------------------------------------
 | Home
@@ -70,3 +72,28 @@ Route::delete('/compras/{id}', [ProductRegisterController::class, 'destroy'])
     ->name('purchases.destroy');
 
 Route::resource('proveedores', SupplierController::class);
+
+/*
+|--------------------------------------------------------------------------
+| VENTAS (acciones)
+|--------------------------------------------------------------------------
+*/ 
+
+Route::get('/ventas', [SaleController::class, 'index'])->name('sales.index');
+Route::get('/ventas/crear', [SaleController::class, 'create'])->name('sales.create');
+Route::post('/ventas', [SaleController::class, 'store'])->name('sales.store');
+Route::get('/ventas/{id}/editar', [SaleController::class, 'edit'])->name('sales.edit');
+Route::put('/ventas/{id}', [SaleController::class, 'update'])->name('sales.update');
+Route::delete('/ventas/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
+Route::get('/ventas/analisis', [SaleController::class, 'analysis'])->name('sales.analysis');
+/*
+|--------------------------------------------------------------------------
+| Analisis
+|--------------------------------------------------------------------------
+*/ 
+Route::get('/analisis', [AnalyticsController::class, 'index'])->name('analytics.index');
+Route::get('/api/analisis/summary', [AnalyticsController::class, 'summary'])->name('api.analytics.summary');
+Route::get('/api/analisis/efficiency', [AnalyticsController::class, 'efficiency'])->name('api.analytics.efficiency');
+
+Route::get('/api/analisis/top-modelos', [AnalyticsController::class, 'topModels']);
+Route::get('/api/analisis/task-summary', [AnalyticsController::class, 'taskSummary']);
