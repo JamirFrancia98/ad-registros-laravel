@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name', 80);
-            $table->string('last_name', 80);
-            $table->string('dni', 12)->unique();
-            $table->string('email', 120)->nullable();
-            $table->string('phone', 30);
-            $table->string('operator', 30)->nullable(); // Claro/Movistar/Entel/Bitel/Otro
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();;
+            $table->string('document_number')->unique()->nullable();
+            $table->string('document_type')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('operator')->nullable(); // Claro/Movistar/Entel/Bitel/Otro
             $table->timestamps();
         });
     }
