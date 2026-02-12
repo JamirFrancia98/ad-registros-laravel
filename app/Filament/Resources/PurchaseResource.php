@@ -24,6 +24,10 @@ class PurchaseResource extends Resource
 
     protected static ?string $label = "Compra";
 
+    protected static ?string $navigationGroup = 'Compras Iphone';
+    protected static ?string $navigationLabel = 'Listado De Iphones';
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $pluralLabel = "Compras";
 
     public static function form(Form $form): Form

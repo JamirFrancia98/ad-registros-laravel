@@ -21,6 +21,10 @@ class ColorResource extends Resource
 
     protected static ?string $label = "Color";
 
+    protected static ?string $navigationGroup = 'Compras Iphone';
+    protected static ?string $navigationLabel = 'Atributos — Colores';
+    protected static ?int $navigationSort = 11;
+
     protected static ?string $pluralLabel = "Colores";
 
     public static function form(Form $form): Form

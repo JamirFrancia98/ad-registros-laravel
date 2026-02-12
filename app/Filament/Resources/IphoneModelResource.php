@@ -21,6 +21,10 @@ class IphoneModelResource extends Resource
 
     protected static ?string $label = "Modelo de iPhone";
 
+    protected static ?string $navigationGroup = 'Compras Iphone';
+    protected static ?string $navigationLabel = 'Atributos — Modelos Iphone';
+    protected static ?int $navigationSort = 10;
+
     protected static ?string $pluralLabel = "Modelos de iPhone";
 
     public static function form(Form $form): Form

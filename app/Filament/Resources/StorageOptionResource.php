@@ -21,6 +21,10 @@ class StorageOptionResource extends Resource
 
     protected static ?string $label = "Opción de almacenamiento";
 
+    protected static ?string $navigationGroup = 'Compras Iphone';
+    protected static ?string $navigationLabel = 'Atributos — Gb';
+    protected static ?int $navigationSort = 12;
+
     protected static ?string $pluralLabel = "Opciones de almacenamiento";
 
     public static function form(Form $form): Form

@@ -19,6 +19,10 @@ class SupplierResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Proveedores';
+    protected static ?string $navigationLabel = 'Lista Proveedores';
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $label = "Proveedor";
 
     protected static ?string $pluralLabel = "Proveedores";
@@ -28,9 +32,25 @@ class SupplierResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nombre')
                     ->required()
                     ->maxLength(120),
+
+                Forms\Components\TextInput::make('last_name')
+                    ->label('Apellido')
+                    ->maxLength(120),
+
+                Forms\Components\TextInput::make('nickname')
+                    ->label('Chapa')
+                    ->maxLength(60),
+
+                Forms\Components\TextInput::make('phone')
+                    ->label('Teléfono')
+                    ->tel()
+                    ->maxLength(25),
+
                 Forms\Components\TextInput::make('payment_part')
+                    ->label('Parte De Pago')
                     ->maxLength(60),
             ]);
     }
@@ -40,20 +60,24 @@ class SupplierResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
+
+                Tables\Columns\TextColumn::make('last_name')
+                    ->label('Apellido')
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('nickname')
+                    ->label('Chapa')
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('phone')
+                    ->label('Teléfono')
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('payment_part')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-            ])
-            ->filters([
-                //
+                    ->label('Parte De Pago')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -80,4 +104,7 @@ class SupplierResource extends Resource
             'edit' => Pages\EditSupplier::route('/{record}/edit'),
         ];
     }
+
+
+
 }

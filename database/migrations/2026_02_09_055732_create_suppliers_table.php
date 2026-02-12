@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 120);
-            $table->string('payment_part', 60)->nullable(); // ej: "PARTE DE PAGO"
+
+            $table->string('name', 120);                 // Nombre
+            $table->string('last_name', 120)->nullable(); // Apellido
+            $table->string('nickname', 60)->nullable();   // Chapa
+            $table->string('phone', 25)->nullable();      // Teléfono
+
+            $table->string('payment_part', 60)->nullable(); // Ej: "Parte De Pago"
             $table->timestamps();
         });
     }

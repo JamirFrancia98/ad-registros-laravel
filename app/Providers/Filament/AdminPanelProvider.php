@@ -18,6 +18,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+use Filament\Navigation\NavigationItem;
+use App\Filament\Resources\PurchaseResource;
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -40,6 +43,21 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->navigationGroups([
+                'Proveedores',
+                'Compras Iphone',
+                'Ventas Iphone',
+            ])
+
+            ->navigationItems([
+                NavigationItem::make('Compra Iphone')
+                    ->group('Compras Iphone')
+                    ->url(fn () => PurchaseResource::getUrl('create'))
+                    ->sort(2),
+            ])
+
+
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
