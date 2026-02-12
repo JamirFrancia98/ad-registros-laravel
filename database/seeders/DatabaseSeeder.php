@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
             ColorsSeeder::class,
             SuppliersSeeder::class,
         ]);
-        Customer::factory(10)->create();
-        Purchase::factory(10)->create();
+        // Customer::factory(10)->create();
+        // Purchase::factory(10)->create();
         User::query()->create([
             'name' => 'Francia Jamir',
             'email' => 'franciajamir@gmail.com',
